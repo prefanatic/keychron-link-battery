@@ -1,0 +1,26 @@
+name: Firmware checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check repository files
+        run: |
+          python3 scripts/check.py
+          sh -n scripts/prepare-source.sh scripts/build.sh
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib dfu-util python3-venv
+      - name: Prepare pinned source
+        run: sh scripts/prepare-source.sh
+      - name: Install Python dependencies
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r .build/source/requirements.txt
+      - name: Build firmware
+        run: PATH="$PWD/.venv/bin:$PATH" sh scripts/build.sh

@@ -1,0 +1,62 @@
+{
+  "status": "experimental; verified on one V1 Max ANSI encoder",
+  "repository": "https://github.com/Keychron/qmk_firmware",
+  "revision": "c5d998442710b38650903937249144a0cd728ebe",
+  "target": "keychron/v1_max/ansi_encoder:keychron",
+  "usb_id": "3434:0913",
+  "model": "V1 Max ANSI encoder",
+  "patch": "v1-max-battery.patch",
+  "license": "GPL-2.0-or-later",
+  "receiver_firmware_observed": "c.3.0 Jun 13 2024 10:28:05",
+  "receiver_protocol_observed": 1,
+  "upstream_extension_reference": "https://github.com/shayangohar/keychron-tray-widget/blob/master/firmware/keychron-k8-he-battery-wired.patch",
+  "recovery": {
+    "filename": "v1-max-ansi-official-1.1.1.bin",
+    "source_url": "https://cdn.shopify.com/s/files/1/0059/0630/1017/files/v1_max_ansi_encoder_v1.1.1_2504301037.bin?v=1746612974",
+    "sha256": "0727fdce9af4dfeaaa099e6a8a0c44d30da113ce770ac4bcc15c9e502c444498",
+    "procedure": "docs/firmware.md"
+  },
+  "image": {
+    "filename": "v1-max-ansi-battery-experimental.bin",
+    "size": 108256,
+    "sha256": "0e81426964eccfb5bcc4ba93f93f593f5b0d98574fd6a02e286446c8dfaacbf3",
+    "compile": "passed",
+    "dfu_suffix": "verified",
+    "hardware_test": "passed on 2026-10-10",
+    "toolchain": "Arm GNU 13.2.Rel1"
+  },
+  "protocol": {
+    "request": "A4; query only after A2 advertises the battery extension",
+    "response_fields": [
+      "A4",
+      "percentage",
+      "voltage_low",
+      "voltage_high",
+      "charging_state",
+      "transport",
+      "model_id",
+      "C",
+      "W",
+      "protocol_version"
+    ],
+    "model_id": 1,
+    "protocol_version": 1,
+    "expected_transport": 4,
+    "capability_response_byte": 3,
+    "capability_mask": 4
+  },
+  "hardware_test": {
+    "date": "2026-10-10",
+    "original_version": "1.1.2",
+    "original_flash_sha256": "b5368f69cdabee0a5d0688033a573bd4a06824e249a8224d6119140497f91b61",
+    "original_flash_reads_match": true,
+    "written_bytes_verified": true,
+    "settings_restored_and_verified": true,
+    "receiver_input_confirmed": true,
+    "encoder_confirmed": true,
+    "battery_percentage_without_cable": 97,
+    "receiver_update_required": false,
+    "wireless_module_update_required": false
+  },
+  "patch_sha256": "f556f54d3cedd90f162793850c3bae2af0f244bacab4b0abddfe7d0cc53b7821"
+}
